@@ -1,0 +1,9 @@
+* {
+    box-sizing: border-box;
+}
+
+.navBar {
+    width: 20%;
+    border: 2px black solid;
+    height: 100%;
+}
