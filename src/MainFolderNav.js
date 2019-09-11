@@ -6,13 +6,13 @@ function MainFolderNav(props) {
 
     const folderList = props.folders.map(folder => { 
         return(
-        <li>{folder}</li>
+        <li className='folderCard'>{folder}</li>
         )
     })
 
     return(
         <section className='navBar'>
-            <ul>
+            <ul className='folderCardList'>
                 {folderList}
             </ul>
         </section>

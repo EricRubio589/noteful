@@ -1,5 +1,6 @@
 * {
     box-sizing: border-box;
+    margin:0;
 }
 
 .headerStyle {
@@ -11,10 +12,12 @@
     height: 200px;
     width: 100%;
     font-size: 40px;
+    margin: 0;
 }
 
 .body {
     display: flex;
     flex-flow: row;
-    width: 75%;
+    width: 100%;
+    margin: 0;
 }

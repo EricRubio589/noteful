@@ -5,13 +5,13 @@ function MainNoteList(props) {
 
     const notesList = props.notes.map(note => {
         return (
-            <li>{note}</li>
+            <li className='noteCard'>{note}</li>
         )
     })
 
     return (
         <section className='noteList'>
-            <ul>{notesList}</ul>
+            <ul className='noteCardList'>{notesList}</ul>
         </section>
     )    
 }

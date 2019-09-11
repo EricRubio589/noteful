@@ -5,5 +5,16 @@
 .navBar {
     width: 20%;
     border: 2px black solid;
-    height: 100%;
+    padding: 10px;
+}
+
+.folderCard {
+    border: 2px solid black;
+    padding: 10px;
+    margin: 10px;
+    list-style: none;
+}
+
+.folderCardList {
+    padding-left: 0;
 }
