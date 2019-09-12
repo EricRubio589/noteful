@@ -7,6 +7,7 @@ import dummyStore from './dummy-store';
 
 class App extends React.Component {
   state = {
+    data: dummyStore,
     folders: dummyStore.folders.map(folder => folder.name),
     notes: dummyStore.notes.map(note => note.name)
   }
@@ -20,7 +21,7 @@ class App extends React.Component {
     <div>
       <header className="headerStyle">Noteful</header>
       <body className='body'>
-        <MainFolderNav folders={this.state.folders}/>
+        <MainFolderNav folders={this.state.dummyStore}/>
         <MainNoteList notes={this.state.notes}/>
         {console.log(this.state.folders)}
       </body>
