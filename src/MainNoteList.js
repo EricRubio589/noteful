@@ -11,7 +11,10 @@ function MainNoteList(props) {
 
     return (
         <section className='noteList'>
-            <ul className='noteCardList'>{notesList}</ul>
+            <ul className='noteCardList'>
+            {notesList}
+            <li className='noteCard'><button className='addNoteButton'>Add Note</button></li>
+            </ul>   
         </section>
     )    
 }

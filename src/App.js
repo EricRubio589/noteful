@@ -11,6 +11,10 @@ class App extends React.Component {
     notes: dummyStore.notes.map(note => note.name)
   }
 
+  changeSelectedFolder = (id) => {
+    this.setState({folders: dummyStore.folders.map(folder => folder.name),notes: dummyStore.notes.map(note => note.name)})
+  }
+
   render() {
   return (
     <div>

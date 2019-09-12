@@ -18,3 +18,8 @@
 .folderCardList {
     padding-left: 0;
 }
+
+.addFolderButton {
+    height: 100%;
+    width: 100%;
+}

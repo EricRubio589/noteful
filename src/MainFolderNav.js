@@ -14,6 +14,7 @@ function MainFolderNav(props) {
         <section className='navBar'>
             <ul className='folderCardList'>
                 {folderList}
+                <li className='folderCard'><button className='addFolderButton'>Add Folder</button></li>
             </ul>
         </section>
     )
