@@ -1,20 +1,23 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import './MainNoteList.css';
 
 function MainNoteList(props) {
-
-    const notesList = props.notes.map(note => {
+    
+    const noteList = props.matchNotes.map(note => {
+        const path = `/note/${note.name}`
         return (
-            <li className='noteCard'>{note}</li>
+            <li className='noteCard'><Link to={path}>{note.name}</Link></li>
         )
     })
 
     return (
         <section className='noteList'>
             <ul className='noteCardList'>
-            {notesList}
+            {noteList}
             <li className='noteCard'><button className='addNoteButton'>Add Note</button></li>
-            </ul>   
+            </ul>
+            {console.log(noteList)}   
         </section>
     )    
 }

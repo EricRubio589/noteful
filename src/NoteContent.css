@@ -1,0 +1,13 @@
+
+.noteList {
+    border: 2px solid black;
+    width: 100%;
+    padding: 10px;
+}
+
+.noteCard {
+    border: 2px solid black;
+    margin: 10px;
+    list-style-type: none;
+    padding: 10px;
+}

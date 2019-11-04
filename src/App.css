@@ -3,6 +3,10 @@
     margin:0;
 }
 
+html, body {
+    height: 100%;
+}
+
 .headerStyle {
     display: flex;
     background-color: black;
@@ -15,9 +19,31 @@
     margin: 0;
 }
 
-.body {
+.body, .sidebar, .main {
     display: flex;
     flex-flow: row;
     width: 100%;
+    min-height: 100%;
     margin: 0;
+}
+
+.sidebar {
+    display: flex;
+    width: 20%;
+    align-items: stretch;
+}
+
+.main {
+    width: 80%;
+    flex-flow: row;
+    align-items: stretch;
+}
+
+.headerLink {
+    text-decoration: none;
+    color: white;
+}
+
+.headerLink:hover {
+    color: gray;
 }
