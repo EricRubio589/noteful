@@ -14,15 +14,8 @@ class App extends React.Component {
     this.state = {
       data: dummyStore,
       folders: dummyStore.folders,
-      notes: dummyStore.notes,
-      selectedFolderId: ''
+      notes: dummyStore.notes
     }
-  }
-  
-
-  //////////////////////////////// This is the callback prop to get the selected folder////////////////////////////////////////////
-  changeSelectedFolder = (selectedId) => {
-    this.setState({selectedFolderId: selectedId})
   }
 
   render() {
