@@ -1,25 +1,37 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import DummyContext from './DummyContext'
 import './MainNoteList.css';
 
-function MainNoteList(props) {
+class MainNoteList extends React.Component {
     
-    const noteList = props.matchNotes.map(note => {
+    static contextType = DummyContext
+    
+    render() {
+
+        const { folderName } = this.props.match.params
+        const matchFolder = this.context.folders.find(folder => folder.name === folderName)
+        const matchNotes = (this.context.notes.filter(note => note.folderId === matchFolder.id)) || this.context.notes
+        
+        const noteList = matchNotes.map(note => {
         const path = `/note/${note.name}`
         return (
             <li className='noteCard'><Link to={path}>{note.name}</Link></li>
-        )
-    })
+            )
+        })
+        
+            
 
-    return (
-        <section className='noteList'>
-            <ul className='noteCardList'>
-            {noteList}
-            <li className='noteCard'><button className='addNoteButton'>Add Note</button></li>
-            </ul>
-            {console.log(noteList)}   
-        </section>
-    )    
+        return (
+            <section className='noteList'>
+                <ul className='noteCardList'>
+                {noteList}
+                <li className='noteCard'><button className='addNoteButton'>Add Note</button></li>
+                </ul>
+                {console.log(noteList)}   
+            </section>
+        ) 
+    }   
 }
 
 export default MainNoteList;

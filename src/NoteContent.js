@@ -1,27 +1,39 @@
 import React from 'react';
+import DummyContext from './DummyContext'
 import './NoteContent.css';
 
-function NoteContent(props) {
+class NoteContent extends React.Component {
 
-    const noteName = props.note.name
-    const noteContent = props.note.content
-    const noteModified = props.note.modified
+    static contextType = DummyContext;
 
-    return(
-        <section className='noteList'>
-            <div className='noteCard'>
-                {noteName}<br/><br/> 
-                Last modified: {noteModified}
-            </div>
-            <p>{noteContent}</p>
-            {console.log()}
-        </section>
-    )
+    render() {
 
+
+        const { noteName } = this.props.match.params
+        const noteObject = this.context.notes.find(note => note.name === noteName)
+
+        console.log(this.context)
+
+        const nameOfNote = noteObject.name
+        const noteContent = noteObject.content
+        const noteModified = noteObject.modified
+
+        return(
+            <section className='noteList'>
+                <div className='noteCard'>
+                    {nameOfNote}<br/><br/> 
+                    Last modified: {noteModified}
+                </div>
+                <p>{noteContent}</p>
+                {console.log()}
+            </section>
+        )
+
+    }
 }
 
-NoteContent.defaultProps = {
-    note: []
-}
+// NoteContent.defaultProps = {
+//     note: []
+// }
 
 export default NoteContent;

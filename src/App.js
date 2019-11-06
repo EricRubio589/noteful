@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { createContext } from 'react';
 import { Route, Link } from 'react-router-dom'
 import './App.css';
 import MainFolderNav from './MainFolderNav';
@@ -6,6 +6,7 @@ import MainNoteList from './MainNoteList';
 import NoteContent from './NoteContent';
 import NoteFolderNav from './NoteFolderNav';
 import dummyStore from './dummy-store';
+import DummyContext from './DummyContext'
 
 
 class App extends React.Component {
@@ -17,61 +18,25 @@ class App extends React.Component {
       notes: dummyStore.notes
     }
   }
-
+  
   render() {
+    
     return (
       <div>
         <header className="headerStyle"><Link className='headerLink' to='/'>Noteful</Link></header>
         <body className='body'>
-          <sidebar className='sidebar'>
-            <Route 
-              exact path ='/'
-              render = {() => 
-                <MainFolderNav data={this.state.folders}/>}             
-            />
-            <Route
-              path ='/folder'
-              render = {() =>
-                <MainFolderNav data={this.state.folders}/>}
-            />
-            <Route
-              path ='/note/:noteName'
-              render = {(routeProps) => {
-                const activeFolder = this.state.folders
-                const matchNote = this.state.notes.find(note => note.name === routeProps.match.params.noteName)
-                return (<NoteFolderNav data={activeFolder.find(folder => folder.id === matchNote.folderId)}/>)}
-              }
-            />
-          </sidebar>
-          <main className ='main'>
-            <Route
-              exact path ='/'
-              render = {() => {
-                const data = this.state.data
-                const matchNotes = this.state.notes
-                return(<MainNoteList data={data} matchNotes={matchNotes}/>)}
-              }
-            />
-            <Route
-              exact path ='/folder/:folderName'
-              render = {(routeProps) => {
-                const data = this.state.data
-                const matchFolder = this.state.folders.find(folder => folder.name === routeProps.match.params.folderName)
-                const matchNotes = this.state.notes.filter(note => note.folderId === matchFolder.id)
-                return (<MainNoteList data={data} matchNotes={matchNotes}/>)}
-              }
-            />
-            <Route
-              exact path ='/note/:noteName'
-              render = {routeProps => {
-                const noteName = routeProps.match.params.noteName
-                const noteObject = this.state.data.notes.find(note => note.name === noteName)
-                console.log(this.state.notes) 
-                return (<NoteContent note={noteObject}/>)
-                }
-              }
-            />
+          <DummyContext.Provider value={this.state}>
+            <sidebar className='sidebar'>
+              <Route exact path ='/' component={MainFolderNav}/>
+              <Route path ='/folder' component={MainFolderNav}/>
+              <Route path ='/note/:noteName' component={NoteFolderNav}/>
+            </sidebar>
+            <main className ='main'>
+              <Route exact path ='/?' component={MainNoteList}/>
+              <Route exact path ='/folder/:folderName' component={MainNoteList}/>
+              <Route exact path ='/note/:noteName' component={NoteContent}/>
             </main>
+          </DummyContext.Provider>
             {console.log()}
         </body>
       </div>

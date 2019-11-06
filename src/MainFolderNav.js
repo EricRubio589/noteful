@@ -1,15 +1,18 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom'
+import DummyContext from './DummyContext'
 import './MainFolderNav.css';
 
 
-function MainFolderNav(props) {
+class MainFolderNav extends React.Component {
 
-    const selectedFolders = props.data.map(folder => folder.name)
+    static contextType = DummyContext;
 
+    render() {
+
+    const selectedFolders = this.context.folders.map(folder => folder.name)
     const folderList = selectedFolders.map(folder => {
         const path = `/folder/${folder}`
-        console.log(selectedFolders)
         return(
             <NavLink to={path}
              className='navLink'
@@ -30,11 +33,11 @@ function MainFolderNav(props) {
     )
     
 }
-
-
-
-MainFolderNav.defaultProps = {
-    folders: []
 }
+
+
+// MainFolderNav.defaultProps = {
+//     folders: []
+// }
 
 export default MainFolderNav;
