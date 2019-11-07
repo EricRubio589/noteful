@@ -32,8 +32,5 @@ class NoteContent extends React.Component {
     }
 }
 
-// NoteContent.defaultProps = {
-//     note: []
-// }
 
 export default NoteContent;

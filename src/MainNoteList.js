@@ -9,10 +9,22 @@ class MainNoteList extends React.Component {
     
     render() {
 
-        const { folderName } = this.props.match.params
-        const matchFolder = this.context.folders.find(folder => folder.name === folderName)
-        const matchNotes = (this.context.notes.filter(note => note.folderId === matchFolder.id)) || this.context.notes
-        
+        const folderName = (this.props.match.params.folderName) || this.context.folders
+        const matchFolder = (this.context.folders.find(folder => folder.name === folderName)) || folderName
+        const matchFolder
+        const matchNotes = (matchFolder instanceof Array)? this.context.notes.filter(note => note.folderId === matchFolder.id) : 
+            this.context.notes.filter(note => )
+
+        // const noteList = notes.forEach(note => matchFolder.forEach(folder => {
+        //     if (note.folderId === folder.id) {
+        //         const path = `/note/${note.name}`
+        //         return (
+        //             <li className='noteCard'><Link to={path}>{note.name}</Link></li>
+        //             ) 
+        //     }
+        //     })
+        // )
+
         const noteList = matchNotes.map(note => {
         const path = `/note/${note.name}`
         return (
@@ -28,7 +40,7 @@ class MainNoteList extends React.Component {
                 {noteList}
                 <li className='noteCard'><button className='addNoteButton'>Add Note</button></li>
                 </ul>
-                {console.log(noteList)}   
+                {console.log(matchFolder)}   
             </section>
         ) 
     }   

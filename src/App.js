@@ -32,7 +32,7 @@ class App extends React.Component {
               <Route path ='/note/:noteName' component={NoteFolderNav}/>
             </sidebar>
             <main className ='main'>
-              <Route exact path ='/?' component={MainNoteList}/>
+              <Route exact path ='/' component={MainNoteList}/>
               <Route exact path ='/folder/:folderName' component={MainNoteList}/>
               <Route exact path ='/note/:noteName' component={NoteContent}/>
             </main>
