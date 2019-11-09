@@ -6,6 +6,11 @@ class NoteContent extends React.Component {
 
     static contextType = DummyContext;
 
+    noteItemDelete = (nameOfNote) => {
+            this.context.deleteItem(nameOfNote);
+            this.props.history.push('/')
+        }
+
     render() {
 
 
@@ -21,10 +26,11 @@ class NoteContent extends React.Component {
         return(
             <section className='noteList'>
                 <div className='noteCard'>
-                    {nameOfNote}<br/><br/> 
-                    Last modified: {noteModified}
+                    {nameOfNote}
+                    <button className='button' onClick={() => this.noteItemDelete(nameOfNote)}>Delete</button> 
                 </div>
-                <p>{noteContent}</p>
+                <p className='noteModified'>Last modified: {noteModified.split('T')[0]}</p>
+                <p className='noteModified'>{noteContent}</p>
                 {console.log()}
             </section>
         )

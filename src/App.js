@@ -1,4 +1,4 @@
-import React, { createContext } from 'react';
+import React from 'react';
 import { Route, Link } from 'react-router-dom'
 import './App.css';
 import MainFolderNav from './MainFolderNav';
@@ -15,10 +15,42 @@ class App extends React.Component {
     this.state = {
       data: dummyStore,
       folders: dummyStore.folders,
-      notes: dummyStore.notes
+      notes: dummyStore.notes,
+      deleteItem: () => {}
     }
   }
+
   
+  componentDidMount() {
+    const url = `http://localhost:9090/`
+    Promise.all([
+      fetch(`${url}folders`),
+      fetch(`${url}notes`)
+    ])
+    .then(([responseFolders, responseNotes]) => {
+      if (!responseFolders.ok) {
+        throw new Error('Oops, there seems to be a problem fetching folders from the server')
+      }
+      if (!responseNotes.ok) {
+        throw new Error('Oops, there seems to be a problem fetching notes from the server')
+      }
+      return Promise.all([responseFolders.json(), responseNotes.json()]);
+    })
+    .then(([responseFolders, responseNotes]) => {
+      this.setState({
+        folders: responseFolders,
+        notes: responseNotes,
+        deleteItem: this.handleDeleteClick
+      })
+    })
+  }
+  
+  handleDeleteClick = (noteToDelete) =>  {
+    this.setState({
+      notes: this.state.notes.filter(note => note.name !== noteToDelete),
+    })
+  }
+
   render() {
     
     return (

@@ -9,30 +9,22 @@ class MainNoteList extends React.Component {
     
     render() {
 
-        const folderName = (this.props.match.params.folderName) || this.context.folders
-        const matchFolder = (this.context.folders.find(folder => folder.name === folderName)) || folderName
-        const matchFolder
-        const matchNotes = (matchFolder instanceof Array)? this.context.notes.filter(note => note.folderId === matchFolder.id) : 
-            this.context.notes.filter(note => )
-
-        // const noteList = notes.forEach(note => matchFolder.forEach(folder => {
-        //     if (note.folderId === folder.id) {
-        //         const path = `/note/${note.name}`
-        //         return (
-        //             <li className='noteCard'><Link to={path}>{note.name}</Link></li>
-        //             ) 
-        //     }
-        //     })
-        // )
+////////////// This logic helps to handle the data depending if we are getting the route prop or not /////////////
+        const matchFolder = (this.context.folders.find(folder => folder.name === this.props.match.params.folderName))
+        const matchNotes = (typeof matchFolder === 'undefined') ?
+            (this.context.notes) :
+            (this.context.notes.filter(note => note.folderId === matchFolder.id))
 
         const noteList = matchNotes.map(note => {
         const path = `/note/${note.name}`
         return (
-            <li className='noteCard'><Link to={path}>{note.name}</Link></li>
+            <li className='noteCard'>
+                <Link className='link' to={path}>{note.name}</Link>
+                <button className='button' onClick={() => this.context.deleteItem(note.name)}>Delete</button>
+                {/*///////////////// Here I used a split to show only the relevant part of the last modified date///////////////*/}
+                <p className='modified'>Last modified:{note.modified.split('T')[0]}</p></li>
             )
-        })
-        
-            
+        })   
 
         return (
             <section className='noteList'>
