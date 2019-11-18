@@ -5,18 +5,22 @@ import MainFolderNav from './MainFolderNav';
 import MainNoteList from './MainNoteList';
 import NoteContent from './NoteContent';
 import NoteFolderNav from './NoteFolderNav';
-import dummyStore from './dummy-store';
-import DummyContext from './DummyContext'
+// import dummyStore from './dummy-store';
+import DummyContext from './DummyContext';
+import AddFolder from './AddFolder';
+import ErrorCatcher from './ErrorCatcher';
+import AddNote from './AddNote';
 
 
 class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      data: dummyStore,
-      folders: dummyStore.folders,
-      notes: dummyStore.notes,
-      deleteItem: () => {}
+      data: [],
+      folders: [],
+      notes: [],
+      deleteItem: () => {},
+      fetchError: false
     }
   }
 
@@ -27,12 +31,16 @@ class App extends React.Component {
       fetch(`${url}folders`),
       fetch(`${url}notes`)
     ])
+    // .catch(error => console.log(`Error in promises ${error}`))
     .then(([responseFolders, responseNotes]) => {
       if (!responseFolders.ok) {
-        throw new Error('Oops, there seems to be a problem fetching folders from the server')
+        // throw new Error('Oops, there seems to be a problem fetching folders from the server'),
+        this.setState({fetchError: true})
+        alert('fetch failed')
       }
       if (!responseNotes.ok) {
-        throw new Error('Oops, there seems to be a problem fetching notes from the server')
+        // throw new Error('Oops, there seems to be a problem fetching notes from the server'),
+        this.setState({fetchError: true})
       }
       return Promise.all([responseFolders.json(), responseNotes.json()]);
     })
@@ -56,21 +64,33 @@ class App extends React.Component {
     return (
       <div>
         <header className="headerStyle"><Link className='headerLink' to='/'>Noteful</Link></header>
-        <body className='body'>
+        <div className='body'>
           <DummyContext.Provider value={this.state}>
-            <sidebar className='sidebar'>
+            <section className='sidebar'>
+            <ErrorCatcher>
               <Route exact path ='/' component={MainFolderNav}/>
+            </ErrorCatcher>
               <Route path ='/folder' component={MainFolderNav}/>
+            <ErrorCatcher>
               <Route path ='/note/:noteName' component={NoteFolderNav}/>
-            </sidebar>
-            <main className ='main'>
+            </ErrorCatcher>
+              <Route path ='/addfolder' component={AddFolder}/>
+              <Route path ='/addnote' component={MainFolderNav}/>
+            </section>
+            <section className ='main'>
+            <ErrorCatcher>
               <Route exact path ='/' component={MainNoteList}/>
               <Route exact path ='/folder/:folderName' component={MainNoteList}/>
+            </ErrorCatcher>
               <Route exact path ='/note/:noteName' component={NoteContent}/>
-            </main>
+            <ErrorCatcher>
+              <Route path ='/addfolder' component={MainNoteList}/>
+            </ErrorCatcher>
+              <Route path ='/addnote' component={AddNote}/>
+            </section>
+            {console.log(this.state.fetchError)}
           </DummyContext.Provider>
-            {console.log()}
-        </body>
+        </div>
       </div>
     );
   }

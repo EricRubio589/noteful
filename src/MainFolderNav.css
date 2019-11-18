@@ -35,16 +35,29 @@
     text-decoration: none;
 }
 
-.navLink:hover {
+.navLink:hover, .buttonLink:hover {
     background-color: dimgray;
     color: white;
 }
 
-.navLinkActive {
+.navLinkActive, .buttonLinkActive {
     display: flex;
     border: 2px solid black;
     padding: 10px;
     margin: 10px;
     background-color: black;
     color: white;
+}
+
+/*/////////////////// Button link Styles /////////////////////////*/
+
+.buttonLink {
+    display: flex;
+    border: 2px solid black;
+    color: white;
+    padding: 10px;
+    margin: 10px;
+    text-decoration: none;
+    background-color: blue;
+    justify-content: center;
 }

@@ -1,0 +1,17 @@
+* {
+    box-sizing: border-box;
+}
+
+.addFolderSection {
+    display: flex;
+    flex-flow: column;
+    width: 100%;
+    border: 2px black solid;
+    padding: 10px;
+}
+
+.form {
+    display: flex;
+    flex-flow: column;
+    margin: 10px;
+}

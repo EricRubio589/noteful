@@ -1,0 +1,30 @@
+* {
+    box-sizing: border-box;
+}
+
+.addNoteSection {
+    display: flex;
+    flex-flow: column;
+    width: 100%;
+    border: 2px black solid;
+    padding: 10px;
+}
+
+.form {
+    display: flex;
+    flex-flow: column;
+    margin: 20px;
+}
+
+.form input, .form select, .form textarea {
+    max-width: 400px;
+    margin-bottom: 15px;
+}
+
+.buttonContainer {
+    max-width: 400px;
+}
+
+.buttonContainer button {
+    width: 50%
+}

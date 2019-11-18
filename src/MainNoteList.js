@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import DummyContext from './DummyContext'
+import DummyContext from './DummyContext';
+import PropTypes from 'prop-types';
 import './MainNoteList.css';
 
 class MainNoteList extends React.Component {
@@ -15,10 +16,10 @@ class MainNoteList extends React.Component {
             (this.context.notes) :
             (this.context.notes.filter(note => note.folderId === matchFolder.id))
 
-        const noteList = matchNotes.map(note => {
+        const noteList = matchNotes.map((note, index) => {
         const path = `/note/${note.name}`
         return (
-            <li className='noteCard'>
+            <li className='noteCard' key={index}>
                 <Link className='link' to={path}>{note.name}</Link>
                 <button className='button' onClick={() => this.context.deleteItem(note.name)}>Delete</button>
                 {/*///////////////// Here I used a split to show only the relevant part of the last modified date///////////////*/}
@@ -30,12 +31,28 @@ class MainNoteList extends React.Component {
             <section className='noteList'>
                 <ul className='noteCardList'>
                 {noteList}
-                <li className='noteCard'><button className='addNoteButton'>Add Note</button></li>
-                </ul>
-                {console.log(matchFolder)}   
+                {/* <li className='noteCard'><button className='addNoteButton'>Add Note</button></li> */}
+                <Link to='/addnote' className='buttonLinkNote'>Add Note</Link>
+                </ul>  
             </section>
         ) 
     }   
 }
+
+MainNoteList.propTypes = {
+    history: PropTypes.object.isRequired,
+    location: PropTypes.object.isRequired,
+    match: PropTypes.object.isRequired, 
+ }
+ 
+ DummyContext.Provider.propTypes ={
+     value: PropTypes.shape({
+         data: PropTypes.array.isRequired,
+         deleteItem: PropTypes.func.isRequired,
+         folders: PropTypes.array.isRequired,
+         notes: PropTypes.array.isRequired
+     })   
+ }
+ 
 
 export default MainNoteList;

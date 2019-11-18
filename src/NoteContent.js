@@ -1,5 +1,6 @@
 import React from 'react';
-import DummyContext from './DummyContext'
+import DummyContext from './DummyContext';
+import PropTypes from 'prop-types';
 import './NoteContent.css';
 
 class NoteContent extends React.Component {
@@ -17,8 +18,6 @@ class NoteContent extends React.Component {
         const { noteName } = this.props.match.params
         const noteObject = this.context.notes.find(note => note.name === noteName)
 
-        console.log(this.context)
-
         const nameOfNote = noteObject.name
         const noteContent = noteObject.content
         const noteModified = noteObject.modified
@@ -31,12 +30,24 @@ class NoteContent extends React.Component {
                 </div>
                 <p className='noteModified'>Last modified: {noteModified.split('T')[0]}</p>
                 <p className='noteModified'>{noteContent}</p>
-                {console.log()}
             </section>
         )
-
     }
 }
 
-
+NoteContent.propTypes = {
+    history: PropTypes.object.isRequired,
+    location: PropTypes.object.isRequired,
+    match: PropTypes.object.isRequired, 
+ }
+ 
+ DummyContext.Provider.propTypes ={
+     value: PropTypes.shape({
+         data: PropTypes.array.isRequired,
+         deleteItem: PropTypes.func.isRequired,
+         folders: PropTypes.array.isRequired,
+         notes: PropTypes.array.isRequired
+     })   
+ }
+ 
 export default NoteContent;

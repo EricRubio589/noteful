@@ -46,3 +46,23 @@
     flex-grow: 0;
     flex-basis: 50%;
 }
+
+.buttonLinkNote {
+    display: flex;
+    border: 2px solid black;
+    color: white;
+    padding: 10px;
+    margin: 10px;
+    width: 50%;
+    margin-left: auto;
+    margin-right: auto;
+    text-decoration: none;
+    background-color: blue;
+    justify-content: center;
+}
+
+.buttonLinkNote:hover {
+    background-color: dimgray;
+    color: white;
+}
+
