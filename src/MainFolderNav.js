@@ -7,32 +7,23 @@ import { timeout } from 'q';
 
 
 class MainFolderNav extends React.Component {
-    constructor(props){
-        super(props);
-        this.state = {
-            fetchError: false
-        }
-    }
+    // constructor(props){
+    //     super(props);
+    //     this.state = {
+    //         fetchError: false
+    //     }
+    // }
 
     static contextType = DummyContext;
-
-    errorTrigger = () => {
-            if (this.context.folders === 'undefined') {
-                throw new Error (`Something went wrong`)
-            }
+    
+    checkForError = () => {
+                if (this.context.fetchError === true) {
+                    throw new Error ('Could not fetch folders from server')
+                }
             }
 
     render() {
 
-        // const getErrorStatus = this.context.fetchError;
-        // if (getErrorStatus === 'true') {
-        //     this.setState({fetchError: true})
-        // }
-        
-        // const checkAfterFetch = setTimeout(() => this.errorTrigger, 2000)
-        // const checkAfterFetch = this.errorTrigger
-
-        console.log('hello')
         const selectedFolders = this.context.folders.map(folder => folder.name)
         const folderList = selectedFolders.map((folder, index) => {
             const path = `/folder/${folder}`
@@ -42,23 +33,33 @@ class MainFolderNav extends React.Component {
                 className='navLink'
                 activeClassName='navLinkActive'
                 >{folder}
-                </NavLink>
+                </NavLink>            
             )
-            
         }) 
 
-        if (this.context.folders === 'undefined'){
-            console.log('This is an error')
-            throw new Error('This is an Error message')
-        }
+        // let checkValue = 1
+        // const checkValue = this.context.folders.length
+        // setTimeout( checkForError, 2000)
+
+        // function checkForError(length) {
+        //     if (length < 1) {
+        //             console.log('This is an error')
+        //             throw new Error('This is an Error message')
+        //         }
+        // }
+
+        
+        
 
         return(
             <section className='navBar'>
                 <ul className='folderCardList'>
                     {folderList}
-                    {/* {checkAfterFetch} */}
                     <NavLink to='/addfolder' className='buttonLink'>Add Folder</NavLink>
-                    {console.log(this.state.folders)}
+                    {this.checkForError()}
+                    {console.log(this.context.fetchError)}
+                    {/* {console.log(this.context.folders.length)} */}
+                    {/* {setTimeout(checkForError(this.context.folders.length),1000)} */}
                 </ul>
             </section>
         )
@@ -79,6 +80,6 @@ DummyContext.Provider.propTypes ={
         folders: PropTypes.array.isRequired,
         notes: PropTypes.array.isRequired
     })   
-}
+} 
 
 export default MainFolderNav;

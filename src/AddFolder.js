@@ -42,7 +42,7 @@ class AddFolder extends React.Component {
             <section className='addFolderSection'>
                 <h2>Add a folder</h2>
                 <form className='form' onSubmit={this.handleSubmit}>
-                    <label htmlFor='name'>Name</label>
+                    <label htmlFor='name' required>Name</label>
                     <input type='text' name='name' id='name'></input>
                     <button type='submit'>Add</button>
                 </form>

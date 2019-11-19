@@ -35,12 +35,13 @@ class App extends React.Component {
     .then(([responseFolders, responseNotes]) => {
       if (!responseFolders.ok) {
         // throw new Error('Oops, there seems to be a problem fetching folders from the server'),
-        this.setState({fetchError: true})
         alert('fetch failed')
+        this.setState({fetchError: true})
       }
       if (!responseNotes.ok) {
         // throw new Error('Oops, there seems to be a problem fetching notes from the server'),
         this.setState({fetchError: true})
+        console.log('error here')
       }
       return Promise.all([responseFolders.json(), responseNotes.json()]);
     })
@@ -51,6 +52,14 @@ class App extends React.Component {
         deleteItem: this.handleDeleteClick
       })
     })
+    .then(([responseFolders, responseNotes]) => {
+      if(!responseFolders.ok) {
+        alert("Oh God, Error here")
+      }
+      if(!responseNotes.ok) {
+        console.log('skdjalksjdla')
+      }
+    })  
   }
   
   handleDeleteClick = (noteToDelete) =>  {
