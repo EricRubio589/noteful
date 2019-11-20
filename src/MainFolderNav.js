@@ -17,7 +17,9 @@ class MainFolderNav extends React.Component {
     static contextType = DummyContext;
     
     checkForError = () => {
+        console.log(this.context.fetchError)
                 if (this.context.fetchError === true) {
+                    console.log('error')
                     throw new Error ('Could not fetch folders from server')
                 }
             }
@@ -57,6 +59,7 @@ class MainFolderNav extends React.Component {
                     {folderList}
                     <NavLink to='/addfolder' className='buttonLink'>Add Folder</NavLink>
                     {this.checkForError()}
+                    {console.log(this.context.folders)}
                     {console.log(this.context.fetchError)}
                     {/* {console.log(this.context.folders.length)} */}
                     {/* {setTimeout(checkForError(this.context.folders.length),1000)} */}

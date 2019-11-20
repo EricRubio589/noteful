@@ -24,6 +24,11 @@ class App extends React.Component {
     }
   }
 
+  checkForError = (response) => {
+      if(response.length < 1) {
+          this.setState({fetchError: true})}
+          console.log(this.state.folders.length)
+    } 
   
   componentDidMount() {
     const url = `http://localhost:9090/`
@@ -31,15 +36,12 @@ class App extends React.Component {
       fetch(`${url}folders`),
       fetch(`${url}notes`)
     ])
-    // .catch(error => console.log(`Error in promises ${error}`))
     .then(([responseFolders, responseNotes]) => {
       if (!responseFolders.ok) {
-        // throw new Error('Oops, there seems to be a problem fetching folders from the server'),
         alert('fetch failed')
         this.setState({fetchError: true})
       }
       if (!responseNotes.ok) {
-        // throw new Error('Oops, there seems to be a problem fetching notes from the server'),
         this.setState({fetchError: true})
         console.log('error here')
       }
@@ -50,17 +52,12 @@ class App extends React.Component {
         folders: responseFolders,
         notes: responseNotes,
         deleteItem: this.handleDeleteClick
-      })
+      }, console.log(responseFolders))  
     })
-    .then(([responseFolders, responseNotes]) => {
-      if(!responseFolders.ok) {
-        alert("Oh God, Error here")
-      }
-      if(!responseNotes.ok) {
-        console.log('skdjalksjdla')
-      }
-    })  
+    
   }
+
+  
   
   handleDeleteClick = (noteToDelete) =>  {
     this.setState({
@@ -97,7 +94,7 @@ class App extends React.Component {
             </ErrorCatcher>
               <Route path ='/addnote' component={AddNote}/>
             </section>
-            {console.log(this.state.fetchError)}
+            {console.log(this.state.notes)}
           </DummyContext.Provider>
         </div>
       </div>
