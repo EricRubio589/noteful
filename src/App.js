@@ -24,11 +24,11 @@ class App extends React.Component {
     }
   }
 
-  checkForError = (response) => {
-      if(response.length < 1) {
-          this.setState({fetchError: true})}
-          console.log(this.state.folders.length)
-    } 
+  // checkForError = (response) => {
+  //     if(response.length < 1) {
+  //         this.setState({fetchError: true})}
+  //         console.log(this.state.folders.length)
+  //   } 
   
   componentDidMount() {
     const url = `http://localhost:9090/`
@@ -37,10 +37,12 @@ class App extends React.Component {
       fetch(`${url}notes`)
     ])
     .then(([responseFolders, responseNotes]) => {
-      if (!responseFolders.ok) {
-        alert('fetch failed')
-        this.setState({fetchError: true})
-      }
+      if (!responseFolders.ok) 
+        
+      // {
+      //   alert('fetch failed')
+      //   this.setState({fetchError: true})
+      // }
       if (!responseNotes.ok) {
         this.setState({fetchError: true})
         console.log('error here')
