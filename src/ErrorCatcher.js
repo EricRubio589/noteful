@@ -1,4 +1,5 @@
 import React from 'react';
+import './ErrorCatcher.css'
 
 class ErrorCatcher extends React.Component {
     constructor(props) {
@@ -14,7 +15,10 @@ class ErrorCatcher extends React.Component {
 
     render() {
         if (this.state.hasError) {
-            return (<h2>The connection to the server failed</h2>)
+            return (
+            <div className='errorContainer'>
+            <   h2>The connection to the server failed</h2>
+            </div>)
         }
         return this.props.children;     
     }

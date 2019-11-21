@@ -21,10 +21,10 @@
     margin-bottom: 15px;
 }
 
-.buttonContainer {
+.noteButtonContainer {
     max-width: 400px;
 }
 
-.buttonContainer button {
+.noteButtonContainer button {
     width: 50%
 }

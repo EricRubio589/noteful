@@ -15,3 +15,11 @@
     flex-flow: column;
     margin: 10px;
 }
+
+.folderButtonContainer {
+    max-width: 400px;
+}
+
+.folderButtonContainer button {
+    width: 50%
+}

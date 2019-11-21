@@ -7,10 +7,17 @@ import './MainNoteList.css';
 class MainNoteList extends React.Component {
     
     static contextType = DummyContext
+
+    ///////////This function throws an error if the value in context of fetchError is true/////////////
+    checkForError = () => {
+                if (this.context.fetchError === true) {
+                    throw new Error ('Could not fetch folders from server')
+                }
+            }
     
     render() {
 
-////////////// This logic helps to handle the data depending if we are getting the route prop or not /////////////
+    ////// This logic helps to handle the data depending if we are getting the route prop or not ///////
         const matchFolder = (this.context.folders.find(folder => folder.name === this.props.match.params.folderName))
         const matchNotes = (typeof matchFolder === 'undefined') ?
             (this.context.notes) :
@@ -31,8 +38,8 @@ class MainNoteList extends React.Component {
             <section className='noteList'>
                 <ul className='noteCardList'>
                 {noteList}
-                {/* <li className='noteCard'><button className='addNoteButton'>Add Note</button></li> */}
                 <Link to='/addnote' className='buttonLinkNote'>Add Note</Link>
+                {this.checkForError()}
                 </ul>  
             </section>
         ) 

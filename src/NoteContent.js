@@ -15,8 +15,8 @@ class NoteContent extends React.Component {
     render() {
 
 
-        const { noteName } = this.props.match.params
-        const noteObject = this.context.notes.find(note => note.name === noteName)
+        const nameFromPath = this.props.match.params.noteName
+        const noteObject = this.context.notes.find(note => note.name === nameFromPath)
 
         const nameOfNote = noteObject.name
         const noteContent = noteObject.content

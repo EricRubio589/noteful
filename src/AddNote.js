@@ -45,10 +45,10 @@ class AddNote extends React.Component {
     }
 
     render() {
-
-        const folderOptions = this.context.folders.map(folder => {
+        ///////We map the folders to show them as options for selection on the form///////////
+        const folderOptions = this.context.folders.map((folder, index) => {
             return (
-            <option value={`${folder.name}`}>{folder.name}</option>
+            <option key={index} value={`${folder.name}`}>{folder.name}</option>
             )
         })
 
@@ -57,12 +57,12 @@ class AddNote extends React.Component {
                 <h2>Add a note</h2>
                 <form onSubmit={this.handleSubmit} className='form'>
                     <label>Name</label>
-                    <input type='text' name='noteName' id='noteName'></input>
+                    <input type='text' name='noteName' id='noteName' required pattern="\S+.*"></input>
                     <label>Folder</label>
                     <select name='folderName' id='folderName'>{folderOptions}</select>
                     <label>Content</label>
-                    <textarea rows='5' name='noteContent' id='noteContent'></textarea>
-                    <div className='buttonContainer'>
+                    <textarea rows='5' name='noteContent' id='noteContent' required></textarea>
+                    <div className='noteButtonContainer'>
                         <button type='submit'>Add</button>
                         <button onClick={() => this.props.history.push('/')}>Cancel</button>
                     </div>

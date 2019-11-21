@@ -23,12 +23,6 @@ class App extends React.Component {
       fetchError: false
     }
   }
-
-  // checkForError = (response) => {
-  //     if(response.length < 1) {
-  //         this.setState({fetchError: true})}
-  //         console.log(this.state.folders.length)
-  //   } 
   
   componentDidMount() {
     const url = `http://localhost:9090/`
@@ -37,15 +31,11 @@ class App extends React.Component {
       fetch(`${url}notes`)
     ])
     .then(([responseFolders, responseNotes]) => {
-      if (!responseFolders.ok) 
-        
-      // {
-      //   alert('fetch failed')
-      //   this.setState({fetchError: true})
-      // }
+      if (!responseFolders.ok) {
+        this.setState({fetchError: true})
+      }
       if (!responseNotes.ok) {
         this.setState({fetchError: true})
-        console.log('error here')
       }
       return Promise.all([responseFolders.json(), responseNotes.json()]);
     })
@@ -54,7 +44,11 @@ class App extends React.Component {
         folders: responseFolders,
         notes: responseNotes,
         deleteItem: this.handleDeleteClick
-      }, console.log(responseFolders))  
+      })  
+    })
+    .catch(error => {
+      this.setState({ fetchError: true })
+      console.error({error})
     })
     
   }
@@ -77,8 +71,8 @@ class App extends React.Component {
             <section className='sidebar'>
             <ErrorCatcher>
               <Route exact path ='/' component={MainFolderNav}/>
-            </ErrorCatcher>
               <Route path ='/folder' component={MainFolderNav}/>
+            </ErrorCatcher>
             <ErrorCatcher>
               <Route path ='/note/:noteName' component={NoteFolderNav}/>
             </ErrorCatcher>
@@ -96,7 +90,6 @@ class App extends React.Component {
             </ErrorCatcher>
               <Route path ='/addnote' component={AddNote}/>
             </section>
-            {console.log(this.state.notes)}
           </DummyContext.Provider>
         </div>
       </div>

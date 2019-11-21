@@ -9,11 +9,6 @@ class NoteFolderNav extends React.Component {
     static contextType = DummyContext;
 
     render() {
-        const catchError = () => {
-        if (this.context.notes.length < 1){
-            console.log('This is an error')
-            throw new Error('This is an Error message')
-        }}
 
         const { noteName } = this.props.match.params
         const matchNote = this.context.notes.find(note => note.name === noteName)
@@ -24,7 +19,6 @@ class NoteFolderNav extends React.Component {
             <section className='navBar'>
                 <ul className='folderCardList'>
                     <Link className='navLink' to={`/folder/${data.name}`}>{data.name}</Link>
-                    <li className='folderCard'><button className='addFolderButton'>Add Folder</button></li>
                 </ul>
             </section>
         )

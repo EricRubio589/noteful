@@ -3,23 +3,15 @@ import { NavLink } from 'react-router-dom';
 import DummyContext from './DummyContext';
 import PropTypes from 'prop-types';
 import './MainFolderNav.css';
-import { timeout } from 'q';
 
 
 class MainFolderNav extends React.Component {
-    // constructor(props){
-    //     super(props);
-    //     this.state = {
-    //         fetchError: false
-    //     }
-    // }
 
     static contextType = DummyContext;
-    
+
+    ///////////This function throws an error if the value in context of fetchError is true/////////////
     checkForError = () => {
-        console.log(this.context.fetchError)
                 if (this.context.fetchError === true) {
-                    console.log('error')
                     throw new Error ('Could not fetch folders from server')
                 }
             }
@@ -39,30 +31,12 @@ class MainFolderNav extends React.Component {
             )
         }) 
 
-        // let checkValue = 1
-        // const checkValue = this.context.folders.length
-        // setTimeout( checkForError, 2000)
-
-        // function checkForError(length) {
-        //     if (length < 1) {
-        //             console.log('This is an error')
-        //             throw new Error('This is an Error message')
-        //         }
-        // }
-
-        
-        
-
         return(
             <section className='navBar'>
                 <ul className='folderCardList'>
                     {folderList}
                     <NavLink to='/addfolder' className='buttonLink'>Add Folder</NavLink>
                     {this.checkForError()}
-                    {console.log(this.context.folders)}
-                    {console.log(this.context.fetchError)}
-                    {/* {console.log(this.context.folders.length)} */}
-                    {/* {setTimeout(checkForError(this.context.folders.length),1000)} */}
                 </ul>
             </section>
         )
