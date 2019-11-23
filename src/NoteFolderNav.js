@@ -13,15 +13,17 @@ class NoteFolderNav extends React.Component {
         const { noteName } = this.props.match.params
         const matchNote = this.context.notes.find(note => note.name === noteName)
         const data = this.context.folders.find(folder => folder.id === matchNote.folderId)
+
+        console.log(this.context);
         
-        return(
+        return data !== undefined ? (
 
             <section className='navBar'>
                 <ul className='folderCardList'>
                     <Link className='navLink' to={`/folder/${data.name}`}>{data.name}</Link>
                 </ul>
             </section>
-        )
+        ) : 'Loading...'
     }       
 }
 

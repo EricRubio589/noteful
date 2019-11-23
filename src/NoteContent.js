@@ -18,9 +18,10 @@ class NoteContent extends React.Component {
         const nameFromPath = this.props.match.params.noteName
         const noteObject = this.context.notes.find(note => note.name === nameFromPath)
 
-        const nameOfNote = noteObject.name
-        const noteContent = noteObject.content
-        const noteModified = noteObject.modified
+
+        const nameOfNote = noteObject !== undefined ? noteObject.name : ''
+        const noteContent = noteObject !== undefined ? noteObject.content: ''
+        const noteModified = noteObject !== undefined ? noteObject.modified : ''
 
         return(
             <section className='noteList'>
