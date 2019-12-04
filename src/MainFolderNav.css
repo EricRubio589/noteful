@@ -35,7 +35,7 @@
     text-decoration: none;
 }
 
-.navLink:hover, .buttonLink:hover {
+.navLink:hover, .buttonLink:hover, .navLink:focus, .buttonLink:focus {
     background-color: dimgray;
     color: white;
 }

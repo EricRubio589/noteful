@@ -47,6 +47,6 @@ html, body {
     color: white;
 }
 
-.headerLink:hover {
+.headerLink:hover, .headerLink:focus {
     color: gray;
 }

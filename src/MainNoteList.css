@@ -61,7 +61,7 @@
     justify-content: center;
 }
 
-.buttonLinkNote:hover {
+.buttonLinkNote:hover, .buttonLinkNote:focus {
     background-color: dimgray;
     color: white;
 }
